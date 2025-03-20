@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/public/css/global.css">
+    <link rel="stylesheet" href="/feed/style.css">
+    <script type="module" src="/public/scripts/elements.js" defer></script>
+    <script type="module" src="/public/scripts/helpers.js" defer></script>
+    <script type="module" src="/public/scripts/api.js" defer></script>
+    <script type="module" src="/feed/scripts/script.js" defer></script>
+    <title>Feed</title>
+</head>
+<body>
+    <main id="main">
+        <!-- LEFT SIDEBAR -->
+        <div class="left__side">
+            <form method="POST" action="#" id="create__post__form" class="shadow">
+                <div class="post__form__topbar">
+                    <div class="profile">
+                        <div class="profile__image">
+                            <img src="/public/imgs/profile.jpg" alt="Profile image">
+                        </div>
+                        <div class="profile__infos">
+                            <p class="profile__name">John Doe</p>
+                        </div>
+                    </div>
+                    <div class="buttons__row">
+                        <button type="button" class="button__on__white" id="media__picker__button">Add media</button>
+                    </div>
+                </div>
+                <textarea name="post" id="post" class="post__input" placeholder="What do you have on your mind today ... ?"></textarea>
+                <div class="preview__media" id="preview__media">
+                    <input type="file" name="medias" multiple accept="image/*" id="media__picker__input" style="display: none;">
+
+                </div>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        <!-- FEED  -->
+        <div id="timeline">
+            <div class="timeline__menu shadow sm__element__1080">
+                <button type="button" class="button__on__white sm__element__1080" id="toggle__mobile__menu">Menu</button>
+                <button type="button" class="button__on__white sm__element__836" id="toggle__mobile__create__button">Create</button>
+            </div>
+            <!-- <div class="post shadow">
+                <div class="post__card__topbar">
+                    <div class="profile">
+                        <div class="profile__image">
+                            <img src="/public/imgs/profile.jpg" alt="Profile image">
+                        </div>
+                        <div class="profile__infos">
+                            <p class="profile__name">John Doe</p>
+                        </div>
+                    </div>
+                    <div class="buttons__row">
+                        <button type="button" class="button__on__white">Delete</button>
+                        <button type="button" class="button__on__white">Edit</button>
+                    </div>
+                </div>
+                <div class="post__text__content">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure ducimus voluptatum laboriosam sit magni laudantium quibusdam excepturi minima, ipsam amet quis ullam nesciunt nam atque ab, rem illo dolorum eum!
+                    </p>
+                </div>
+                <div class="post__images count__2">
+                    <img src="/public/imgs/profile.jpg" alt="Post image">
+                    <img src="/public/imgs/profile.jpg" alt="Post image">
+                </div>
+                <div class="actions__on__post">
+                    <button type="button" id="like" class="button__on__white">Like</button>
+                    <button type="button" id="dislike" class="button__on__white">Dislike</button>
+                    <button type="button" id="comment" class="button__on__white">Comment</button>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="right__side">
+            <div class="shadow side__menu">
+                <h3>Menu</h3>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

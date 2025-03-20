@@ -1,0 +1,112 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-ground-layer : #EEE;
+    --bg-layer-one : #FFF;
+}
+
+body {
+    min-height: 100dvh;
+    width: 100%;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;    
+}
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+    font-size: .85rem;
+}
+
+.profile__image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile__name {
+    font-weight: bold;
+}
+
+/* POST CARD */
+.post {
+    min-height: 100px;
+    width: 100%;
+    background-color: var(--bg-layer-one);
+    /* padding: 1rem; */
+    border-radius: 4px;
+}
+
+.post__card__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    padding: 1rem 1rem .5rem;
+}
+
+.post__text__content {
+    min-height: 60px;
+    font-size: .9rem;
+    padding: .5rem 1rem 1rem;
+}
+
+.post__images.count__2 {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.post .actions__on__post {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap:1rem;
+    padding: .5rem 1rem;
+}
+
+/* GLOBAL */
+.shadow {
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+
+.buttons__row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+
+.button__on__white {
+    padding: .3rem .8rem;
+    border-radius: 3px;
+    background-color: #333;
+    color: #FFF;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: .3s ease-out;
+    font-size: .85rem;
+
+    &:hover {
+        background-color: transparent;
+        color: #333;
+        border-color: #333;
+    }
+}
