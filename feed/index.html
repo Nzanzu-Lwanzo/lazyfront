@@ -16,7 +16,7 @@
     <main id="main">
         <!-- LEFT SIDEBAR -->
         <div class="left__side">
-            <form method="POST" action="#" id="create__post__form" class="shadow">
+            <form method="POST" action="#" id="create__post__form" class="shadow post__form">
                 <div class="post__form__topbar">
                     <div class="profile">
                         <div class="profile__image">
@@ -82,6 +82,32 @@
             <div class="shadow side__menu">
                 <h3>Menu</h3>
             </div>
+            
+            <form method="PATCH" action="#" id="edit__post__form" class="shadow post__form edit__post__form">
+                <h2>EDIT FORM</h2>
+                <div class="post__form__topbar">
+                    <div class="profile">
+                        <div class="profile__image">
+                            <img src="/public/imgs/profile.jpg" alt="Profile image">
+                        </div>
+                        <div class="profile__infos">
+                            <p class="profile__name">John Doe</p>
+                        </div>
+                    </div>
+                    <div class="buttons__row">
+                        <button type="button" class="button__on__white" id="media__picker__button">Add media</button>
+                    </div>
+                </div>
+                <textarea name="post" id="post" class="post__input" placeholder="What do you have on your mind today ... ?"></textarea>
+                <div class="preview__media" id="preview__media">
+                    <input type="file" name="medias" multiple accept="image/*" id="media__picker__input" style="display: none;">
+
+                </div>
+                <div class="buttons__row">
+                    <button type="button" id="cancel__edition">Cancel</button>
+                    <button type="submit">Edit</button>
+                </div>
+            </form>
         </div>
     </main>
 </body>
