@@ -1,20 +1,21 @@
 import {
-    getPostStringComponent,
+    readPoststringComponent,
     getImageBlobURL,
     getPreviewImageComponent,
     incrementCounter,
     getPostId,
     removePostCard,
-    getPostElementComponent
+    getPostElementComponent,
+    fillForm
 } from "/public/scripts/helpers.js"
 
 import {
-    getPosts,
+    readPosts,
     createPost,
     likePost,
     dislikePost,
     deletePost,
-    editPost
+    updatePost
 } from "/public/scripts/api.js"
 import {
     timeline,
@@ -26,22 +27,22 @@ import {
     toggleMobileMenu,
     creationFormContainer,
     toggleMobileCreateForm,
-    editPostForm,
+    updatePostForm,
     cancelEditButton
 } from "/public/scripts/elements.js"
 
 // GET AND DISPLAY ALL THE POSTS
 const posts = [
-    { id: 1, title: "Hello world" },
-    { id: 2, title: "Thug life" },
-    { id: 3, title: "World Wide MOB figgaz" },
-    { id: 4, title: "It's just me against the world" },
+    { id: 1, description: "Hello world" },
+    { id: 2, description: "Thug life" },
+    { id: 3, description: "World Wide MOB figgaz" },
+    { id: 4, description: "It's just me against the world" },
 ];
 
 if (timeline) {
-    getPosts().then((posts) => {
+    readPosts().then((posts) => {
         let postsComponentsString = posts.map((post) => {
-            return getPostStringComponent(post)
+            return readPoststringComponent(post)
         })
 
         timeline.innerHTML += postsComponentsString.join("");
@@ -93,6 +94,7 @@ if (toggleMobileCreateForm && creationFormContainer) {
 }
 
 
+// CLICK EVENT DELEGATION
 let postToEdit = null;
 
 timeline.addEventListener("click", async function (event) {
@@ -100,7 +102,7 @@ timeline.addEventListener("click", async function (event) {
 
     // LIKE THE POST   
     if (element.id == "like") {
-        event.preventDefault()
+        event.preventDefault(getPostId(element.id))
         let liked = await likePost();
         if (liked) {
             let counter = element.querySelector("#count__likes");
@@ -110,7 +112,7 @@ timeline.addEventListener("click", async function (event) {
     // DISLIKE THE POST  
     else if (element.id == "dislike") {
         event.preventDefault()
-        let disliked = await dislikePost();
+        let disliked = await dislikePost(getPostId(element.id));
         if (disliked) {
             let counter = element.querySelector("#count__dislikes");
             incrementCounter(counter)
@@ -137,25 +139,42 @@ timeline.addEventListener("click", async function (event) {
 
         if (postToEdit) {
             // Fill the inputs with the values of the post to edit
-            
+            fillForm(postToEdit)
 
             // Show the form to edit the post
-            editPostForm.classList.add("show")
+            updatePostForm.classList.add("show")
         }
+
+        postToEdit = null;
     }
 }, true)
 
+// CLICK EVENT DELEGATION
+document.body.addEventListener("dblclick", function (event) {
+
+    const element = event.target;
+
+    if (element.nodeName === "IMG" && element.closest("#preview__media")) {
+        // Remove the element from the DOM
+        element.remove();
+
+        // Remove the element from the list of files
+        // Maybe delete it from the backend too
+
+    }
+})
+
 // EDIT A POST
-if (editPostForm) {
-    editPostForm.addEventListener("submit", async function (event) {
+if (updatePostForm) {
+    updatePostForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        const editedPost = await editPost(formData)
+        const editedPost = await updatePost(postToEdit.id, formData)
 
-        if (editPost) {
+        if (editedPost) {
             // Hide the edit form
-            editPostForm.classList.remove("show")
+            updatePostForm.classList.remove("show")
 
             // Replace the old post card by a newer
             const newPostElement = getPostElementComponent({ id: 12 });
@@ -172,7 +191,7 @@ if (editPostForm) {
 // CANCEL EDITION
 if (cancelEditButton) {
     cancelEditButton.addEventListener("click", function () {
-        editPostForm.classList.remove("show")
+        updatePostForm.classList.remove("show")
         postToEdit = null
     })
 }

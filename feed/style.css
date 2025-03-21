@@ -108,6 +108,11 @@ body {
     }
 }
 
+.side__menu__link {
+    display: inline-block;
+    padding-block: .5rem;
+}
+
 .timeline__menu {
     background-color: var(--bg-layer-one);
     border-radius: 4px;

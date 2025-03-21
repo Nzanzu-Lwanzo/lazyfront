@@ -1,14 +1,15 @@
+import { updatePostFormTextarea } from "./elements.js";
 
-export function getPostStringComponent(post) {
+export function readPoststringComponent(post) {
     return `
     <div class="post shadow" id="xxx-postcard-${post.id}">
         <div class="post__card__topbar">
             <div class="profile">
                 <div class="profile__image">
-                    <img src="/public/imgs/profile.jpg" alt="Profile image">
+                    <img src="${post.author?.image}" alt="Profile image of ${post.author?.name}">
                 </div>
                 <div class="profile__infos">
-                    <p class="profile__name">John Doe</p>
+                    <p class="profile__name">${post.author?.name}</p>
                 </div>
             </div>
             <div class="buttons__row">
@@ -18,13 +19,16 @@ export function getPostStringComponent(post) {
         </div>
         <div class="post__text__content">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure ducimus voluptatum laboriosam sit magni laudantium quibusdam excepturi minima, ipsam amet quis ullam nesciunt nam atque ab, rem illo dolorum eum!
+                ${post.description}
             </p>
         </div>
-        <div class="post__images count__2">
-            <img src="/public/imgs/profile.jpg" alt="Post image">
-            <img src="/public/imgs/profile.jpg" alt="Post image">
-        </div>
+        ${post.images ? `
+            <div class="post__images ${post.images.length === 2 && "count__2"}">
+                ${post.images.map((url) => {
+                    return getPreviewImageComponent(url).outerHTML;
+                }).join("")}
+            </div>
+        ` : ''}
         <div class="actions__on__post">
             <button type="button" id="like" class="button__on__white like__button">
                 <span>Like<span/>
@@ -44,16 +48,16 @@ export function getPostElementComponent(post) {
 
     const div = document.createElement("div")
     div.id = `xxx-postcard-${post.id}`
-    div.classList.add("shadow","post");
+    div.classList.add("shadow", "post");
 
     const innerHTML = `
     <div class="post__card__topbar">
         <div class="profile">
             <div class="profile__image">
-                <img src="/public/imgs/profile.jpg" alt="Profile image">
+                <img src="${post.author?.image}" alt="Profile image of ${post.author?.name}">
             </div>
             <div class="profile__infos">
-                <p class="profile__name">John Doe</p>
+                <p class="profile__name">${post.author?.name}</p>
             </div>
         </div>
         <div class="buttons__row">
@@ -63,13 +67,16 @@ export function getPostElementComponent(post) {
     </div>
     <div class="post__text__content">
         <p>
-            Edited post (just to show you it works)
+            ${post.description}
         </p>
     </div>
-    <div class="post__images count__2">
-        <img src="/public/imgs/profile.jpg" alt="Post image">
-        <img src="/public/imgs/profile.jpg" alt="Post image">
-    </div>
+    ${post.images ? `
+        <div class="post__images ${post.images.length === 2 && "count__2"}">
+            ${post.images.map((url) => {
+                return getPreviewImageComponent(url).outerHTML;
+            }).join("")}
+        </div>
+    ` : ''}
     <div class="actions__on__post">
         <button type="button" id="like" class="button__on__white like__button">
             <span>Like<span/>
@@ -94,7 +101,7 @@ export function getPreviewImageComponent(url) {
     const image = document.createElement("img")
     image.src = url;
 
-    return image;
+    return image
 }
 
 export function incrementCounter(counter) {
@@ -114,7 +121,14 @@ export function getPostId(id_string) {
     return arr[2]
 }
 
-
 export function removePostCard(id) {
     document.getElementById(`xxx-postcard-${id}`).remove()
+}
+
+export function fillForm(post) {
+
+    updatePostFormTextarea.value = post.description;
+
+    // Display the images too
+
 }

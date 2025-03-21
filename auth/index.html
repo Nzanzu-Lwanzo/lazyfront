@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/public/css/global.css">
+    <link rel="stylesheet" href="/auth/style.css">
+    <script type="module" src="/public/scripts/elements.js" defer></script>
+    <script type="module" src="/public/scripts/helpers.js" defer></script>
+    <script type="module" src="/public/scripts/api.js" defer></script>
+    <script type="module" src="/auth/scripts/script.js" defer></script>
+    <title>Authenticate</title>
+</head>
+<body>
+    <main id="main" class="center">
+        <form method="POST" action="#" id="auth__form" class="shadow auth__form">
+
+            <h1>Log In - Sign In</h1>
+            <div class="input__container">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="John Doe">
+            </div>
+            <div class="input__container">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" placeholder="xxx-keep-it-secret">
+            </div>
+            <div class="input__container">
+                <label for="email">Username</label>
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+            </div>
+            <button type="submit" class="button__on__white">Envoyer</button>
+        </form>
+    </main>
+</body>
+</html>
